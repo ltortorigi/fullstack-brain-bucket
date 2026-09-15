@@ -31,7 +31,7 @@ Fullstack Brain Bucket uses separate DEV and PROD environments to manage and dep
 
 ### architecture
 
-```text
+``` text
 LOCAL
   │
   ▼
@@ -40,12 +40,12 @@ GitHub
   ├── dev  ──► Render ─────────► DEV
   │
   └── main ──► GitHub Actions ─► GCP ──► PROD
-
-stack
+```
+### stack
 
 HTML/CSS/JS | Node.js | Express | Git/GitHub | Render |
 GCP | Linux | Nginx | PM2 | Certbot | GitHub Actions
-
+``` text
 fullstack-brain-bucket/
 ├── .github/
 │   └── workflows/
@@ -57,9 +57,9 @@ fullstack-brain-bucket/
 │   └── app.js
 ├── .gitignore
 └── ...
-
-GCP
+``` 
+### GCP
 
 external IP: 34.174.105.215
 Linux user: logantort23
-instructor SSH public key installed: NEED TO VERIFY
+instructor SSH public key installed: yes
