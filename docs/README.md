@@ -14,7 +14,7 @@
 | DEV codebase | [`dev`](https://github.com/ltortorigi/fullstack-brain-bucket/tree/dev) |
 | DEV server | [Render](https://fullstack-brain-bucket-dj2n.onrender.com) |
 | docs | [`docs/`](https://github.com/ltortorigi/fullstack-brain-bucket/tree/main/docs) |
-| published docs | [GitHub Pages](ADD-GITHUB-PAGES-URL-HERE) |
+| published docs | [GitHub Pages](https://ltortorigi.github.io/fullstack-brain-bucket/) |
 | CI/CD workflow | [`re-deploy-main-to-gcp.yml`](https://github.com/ltortorigi/fullstack-brain-bucket/blob/main/.github/workflows/re-deploy-main-to-gcp.yml) |
 | successful PROD deployment | [GitHub Action](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/35032867701) |
 | resolved GOLF issue | [SSH deployment issue](https://github.com/ltortorigi/fullstack-brain-bucket/issues/1) |
