@@ -60,6 +60,6 @@ fullstack-brain-bucket/
 ``` 
 ### GCP
 
-external IP: 34.174.105.215
-Linux user: logantort23
-instructor SSH public key installed: yes
+external IP: `34.174.105.215`  
+Linux user: `logantort23`  
+instructor SSH public key installed: `yes`
