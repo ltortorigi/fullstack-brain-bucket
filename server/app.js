@@ -11,8 +11,13 @@ const app = express();
 app.use(express.static(join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(join(__dirname, 'public', 'index.html'));
-})
+  res.sendFile(join(__dirname, '../public', 'index.html'));
+});
 
+app.get('/api/hello', (req, res) => {
+  res.send('hello from the server');
+});
 
-app.listen(3000, () => console.log('http://localhost:3000'));
+app.listen(3000, () => {
+  console.log('http://localhost:3000');
+});
