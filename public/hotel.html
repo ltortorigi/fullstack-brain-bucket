@@ -1,0 +1,110 @@
+<!doctype html>
+
+<!doctype html>
+
+<html>
+
+<head>
+
+  <title>
+    hotel 04
+  </title>
+
+</head>
+
+<body>
+
+  <hr>
+
+  <h2>iss5. client sends data</h2>
+
+  <button id="postData">
+    post data
+  </button>
+
+  <button id="getData">
+    get data
+  </button>
+
+  <pre id="output"></pre>
+
+  <script>
+
+    // POST DATA
+    document
+      .querySelector('#postData')
+      .addEventListener(
+        'click',
+        sendData
+      );
+
+    async function sendData() {
+
+      const student = {
+        name: 'Lasagna',
+        major: 'CIS'
+      };
+
+      const response =
+        await fetch(
+          '/api/students',
+          {
+            method: 'POST',
+
+            headers: {
+              'Content-Type':
+                'application/json'
+            },
+
+            body:
+              JSON.stringify(student)
+          }
+        );
+
+      const data =
+        await response.json();
+
+      document
+        .querySelector('#output')
+        .textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+    }
+
+
+    // GET DATA
+    document
+      .querySelector('#getData')
+      .addEventListener(
+        'click',
+        getData
+      );
+
+    async function getData() {
+
+      const response =
+        await fetch(
+          '/api/students'
+        );
+
+      const data =
+        await response.json();
+
+      document
+        .querySelector('#output')
+        .textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+    }
+
+  </script>
+
+</body>
+
+</html>
