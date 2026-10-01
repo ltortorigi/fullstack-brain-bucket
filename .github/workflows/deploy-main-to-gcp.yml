@@ -1,46 +1,61 @@
-name: re-deploy-main-to-gcp.yml
-
+name: Deploy HOTEL to GCP
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
+permissions:
+  contents: read
+concurrency:
+  group: hotel-production
+  cancel-in-progress: false
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: npm ci
+      - run: npm test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
       - name: Prepare SSH
         shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
+          set -euo pipefail
+          test -n "$SSH_PRIVATE_KEY"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-
-          # safer than StrictHostKeyChecking=no
-          # ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
-          ssh-keyscan -H "34.174.105.215" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Deploy over SSH
+          ssh-keyscan -H 34.174.105.215 >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Deploy and verify database health
         shell: bash
-        env:
-          SSH_USER: logantort23 #${{ secrets.SSH_USER }}
-          SSH_HOST: 34.174.105.215 #${{ secrets.SSH_HOST }}
-          APP_DIR: app/fullstack-brain-bucket.app/server # ${{ vars.APP_DIR }}
-          PM2_NAME: app # ${{ vars.PM2_NAME }}
         run: |
-          ssh -i ~/.ssh/deploy_key -T "$SSH_USER@$SSH_HOST" <<EOF
-            set -e
-
-            cd "$APP_DIR"
-          
-            git pull
-            npm ci
-
-            pm2 restart "$PM2_NAME" || pm2 start app.js --name "$PM2_NAME"
-
+          ssh -i ~/.ssh/deploy_key -T logantort23@34.174.105.215 'bash -se' <<'REMOTE'
+            cd "$HOME/app/fullstack-brain-bucket.app/server"
+            git fetch origin main
+            git checkout main
+            git merge --ff-only origin/main
+            npm ci --omit=dev
+            node --input-type=module -e "import {connectMongo} from './mongo.js'; const {client} = await connectMongo(); await client.close();"
+            pm2 startOrReload ecosystem.config.cjs --update-env
             pm2 save
-          EOF
+            curl --fail --silent --show-error --retry 5 --retry-connrefused --retry-delay 2 http://127.0.0.1:3000/api/health
+          REMOTE
+      - name: Verify public PROD
+        run: curl --fail --silent --show-error --max-time 30 https://logan.barrycumbie.com/api/health
+      - name: Remove temporary SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

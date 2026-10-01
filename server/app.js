@@ -1,23 +1,35 @@
-// app.js with "type": "module"
-import express from 'express';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import {connectMongo} from './mongo.js';
+import {createApp} from './routes.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+async function start() {
+  const {client, db, collection} = await connectMongo();
+  const app = createApp({
+    collection,
+    ping: () => db.command({ping: 1}),
+    devTools: process.env.NODE_ENV !== 'production' &&
+      process.env.ENABLE_DEV_TOOLS === 'true',
+  });
+  const port = Number(process.env.PORT || 3000);
+  const server = app.listen(port, () => {
+    console.log(`HOTEL connected to MongoDB. Server listening on port ${port}.`);
+  });
+  server.on('error', async () => {
+    console.error('Could not start HTTP server. Check PORT and running processes.');
+    await client.close();
+    process.exitCode = 1;
+  });
+  const shutdown = () => {
+    server.close(async () => {
+      await client.close();
+      process.exit(0);
+    });
+    setTimeout(() => process.exit(1), 10000).unref();
+  };
+  process.once('SIGTERM', shutdown);
+  process.once('SIGINT', shutdown);
+}
 
-const app = express();
-
-app.use(express.static(join(__dirname, '../public')));
-
-app.get('/', (req, res) => {
-  res.sendFile(join(__dirname, '../public', 'index.html'));
-});
-
-app.get('/api/hello', (req, res) => {
-  res.send('hello from the server');
-});
-
-app.listen(3000, () => {
-  console.log('http://localhost:3000');
+start().catch((error) => {
+  console.error(error.message);
+  process.exitCode = 1;
 });

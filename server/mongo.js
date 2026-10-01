@@ -1,153 +1,32 @@
-import 'dotenv/config';
-import { MongoClient, ServerApiVersion } from 'mongodb';
-import express from 'express';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import {config} from 'dotenv';
+import {fileURLToPath} from 'node:url';
+import {MongoClient, ServerApiVersion} from 'mongodb';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Load server/.env even if PM2 starts from another directory.
+config({path: fileURLToPath(new URL('.env', import.meta.url)), quiet: true});
 
-const app = express();
-
-const uri = process.env.MONGO_URI;
-
-// Middleware
-app.use(express.static(join(__dirname, '../public')));
-app.use(express.json());
-
-
-// MongoDB Client
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+export async function connectMongo() {
+  // Support the environment variable used in the earlier class lab too.
+  const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
+  if (!uri) {
+    throw new Error('Set MONGODB_URI (or MONGO_URI) in server/.env or your host environment.');
   }
-});
-
-
-// Connect to MongoDB
-async function run() {
-
+  let client;
   try {
-
+    client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+    serverSelectionTimeoutMS: 10000,
+    });
     await client.connect();
-
-    await client
-      .db('admin')
-      .command({ ping: 1 });
-
-    console.log(
-      'Pinged your deployment. You successfully connected to MongoDB!'
-    );
-
-  } catch (error) {
-
-    console.error(error);
-
+    const db = client.db(process.env.MONGODB_DB || 'hotel');
+    await db.command({ping: 1});
+    return {client, db, collection: db.collection('students')};
+  } catch {
+    await client?.close();
+    throw new Error('MongoDB connection failed. Check the URI, database user, and Atlas network access.');
   }
-
 }
-
-run();
-
-
-// Home Page
-app.get('/', (req, res) => {
-
-  res.sendFile(
-    join(__dirname, '../public', 'hotel.html')
-  );
-
-});
-
-
-// Hello Route
-app.get('/api/hello', function(req, res) {
-
-  const message = {
-    message: 'hello from hard code json',
-    success: 'true'
-  };
-
-  res.json(message);
-
-});
-
-
-// POST Student
-app.post('/api/students', async function(req, res) {
-
-  try {
-
-    console.log(req.body);
-
-    const database =
-      client.db('hotel');
-
-    const students =
-      database.collection('students');
-
-    const result =
-      await students.insertOne(req.body);
-
-    res.json({
-      success: true,
-      insertedId: result.insertedId,
-      received: req.body
-    });
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      error: error.message
-    });
-
-  }
-
-});
-
-
-// GET Students
-app.get('/api/students', async function(req, res) {
-
-  try {
-
-    const database =
-      client.db('hotel');
-
-    const students =
-      database.collection('students');
-
-    const data =
-      await students
-        .find({})
-        .toArray();
-
-    res.json(data);
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      error: error.message
-    });
-
-  }
-
-});
-
-
-// Start Server
-app.listen(5500, () => {
-
-  console.log(
-    'Server is running on http://localhost:5500'
-  );
-
-});
