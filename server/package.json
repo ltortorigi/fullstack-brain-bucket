@@ -32,6 +32,7 @@
     "node": ">=20.19.0"
   },
   "devDependencies": {
+    "jsdom": "^26.1.0",
     "mongodb-memory-server": "^10.4.3"
   }
 }

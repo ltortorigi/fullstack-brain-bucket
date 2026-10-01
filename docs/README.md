@@ -18,20 +18,20 @@
 
 | Requirement | Evidence |
 | --- | --- |
-| MongoDB Atlas connection | [MongoDB driver, environment config, connection + ping](../server/mongo.js) |
-| GET all | [GET /api/students](../server/routes.js) |
-| GET one by identifier | [GET /api/students/:id and ObjectId validation](../server/routes.js) |
-| Filtered GET | [GET /api/students?major=CIS](../server/routes.js) |
-| POST / create | [POST /api/students](../server/routes.js) |
-| PATCH / update | [PATCH /api/students/:id](../server/routes.js) |
-| DELETE | [DELETE /api/students/:id](../server/routes.js) |
-| Frontend fetch + DOM updates | [Client JavaScript](../public/assets/js/hotel.js) · [HTML](../public/hotel.html) |
-| Persistent CRUD | [Real MongoDB integration tests](../server/test/api.test.js); live Atlas verification pending |
-| Secrets excluded from Git | [.gitignore](../.gitignore) · [blank environment template](../server/.env.example) |
+| MongoDB Atlas connection | [MongoDB driver, environment config, connection + ping](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/mongo.js) |
+| GET all | [GET /api/students](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L55) |
+| GET one by identifier | [GET /api/students/:id and ObjectId validation](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L73) |
+| Filtered GET | [GET /api/students?major=CIS](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L55) |
+| POST / create | [POST /api/students](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L80) |
+| PATCH / update | [PATCH /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L88) |
+| DELETE | [DELETE /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L94) |
+| Frontend fetch + DOM updates | [Client JavaScript](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/public/assets/js/hotel.js) · [HTML](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/public/hotel.html) |
+| Persistent CRUD | [Real MongoDB integration tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/test/api.test.js); [GitHub Actions: 10 database/API tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36935645474); live Atlas verification pending |
+| Secrets excluded from Git | [.gitignore](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/.gitignore) · [blank environment template](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/.env.example) |
 | HOTEL milestone | Pending creation and assignment to issue #2 |
 | Feature issue | [Issue #2](https://github.com/ltortorigi/fullstack-brain-bucket/issues/2) |
 | Development branch | [hotel/student-crud](https://github.com/ltortorigi/fullstack-brain-bucket/tree/hotel/student-crud) |
-| Feature → dev | PR pending |
+| Feature → dev | [PR #3](https://github.com/ltortorigi/fullstack-brain-bucket/pull/3) |
 | dev → main | PR pending DEV verification |
 | Successful HOTEL PROD deployment | Pending; do not use the older GOLF run as HOTEL evidence |
 
@@ -62,6 +62,6 @@ Stack: HTML/CSS/JavaScript, Bootstrap 5, Bootstrap Icons, Node.js, Express 5, Mo
 
 ## Setup + verification
 
-See [SETUP.md](SETUP.md) for local, Render, and GCP setup, API examples, and the final deployment checklist.
+See [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/docs/SETUP.md) for local, Render, and GCP setup, API examples, and the final deployment checklist.
 
 The previous Brain Bucket idea-board files remain in `public/asdindex.html`, `public/pages/`, and `public/assets/`. The HOTEL directory is served at `/`, `/index.html`, and `/hotel.html`.

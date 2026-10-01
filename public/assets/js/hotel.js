@@ -67,9 +67,13 @@ async function loadStudents() {
   try {
     students = await request(`/api/students${major ? `?major=${encodeURIComponent(major)}` : ''}`);
   } catch (error) {
+    ui('connectionStatus').textContent = 'Connection unavailable';
+    ui('connectionStatus').className = 'connection-status disconnected';
     ui('listStatus').textContent = 'Could not refresh the directory. Any records below may be out of date.';
     throw error;
   }
+  ui('connectionStatus').textContent = 'Connected to MongoDB';
+  ui('connectionStatus').className = 'connection-status connected';
   ui('studentList').replaceChildren();
   ui('recordCount').textContent = students.length;
   ui('listStatus').textContent = students.length ?
