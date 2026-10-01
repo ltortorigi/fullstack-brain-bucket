@@ -61,6 +61,22 @@ Before deployment, create `server/.env` on the VM and set `MONGODB_URI` (or the 
 
 The workflow runs tests, connects through SSH, updates `main`, installs production dependencies, verifies MongoDB connectivity, reloads the PM2 `app` process using `ecosystem.config.cjs`, and checks local plus public `/api/health`. If the database setup is missing, it stops before reloading PM2.
 
+## Connection troubleshooting
+
+Startup logs now include a fixed error category without printing the URI or password:
+
+| Category | Check |
+| --- | --- |
+| `MONGO_PLACEHOLDER` | Replace example values and `<db_password>`; `MONGODB_URI` wins if both URI variables exist. |
+| `MONGO_URI` | Paste only the complete URI, without `MONGO_URI=` or surrounding quotes; encode special password characters. |
+| `MONGO_AUTH` | Check the Atlas database username and password. |
+| `MONGO_PERMISSION` | Check the database user's access to the selected database. |
+| `MONGO_DNS` | Check the Atlas hostname and whether the cluster is active. |
+| `MONGO_TLS` | Check the host's TLS certificates and network. Keep certificate checks enabled. |
+| `MONGO_NETWORK` | Check the host's Atlas IP access entries, cluster availability, and network connectivity. |
+
+If it works locally but fails on Render, the computer and Render use different outbound IPs. In the Render service, select **Connect → Outbound** and copy the listed ranges. In the Atlas project, add those exact ranges to **Network Access → IP Access List**. A rule for the home computer alone does not cover Render. The ranges are shared with other Render services in the same region; database authentication still applies. Check [Render's outbound IP documentation](https://render.com/docs/outbound-ip-addresses) and [Atlas's IP access list documentation](https://www.mongodb.com/docs/atlas/security/ip-access-list/).
+
 ## API contract
 
 | Method | URL | Body / result |
