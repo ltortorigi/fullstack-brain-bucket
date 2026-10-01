@@ -47,6 +47,7 @@ For the existing Render service:
 | Build command | `npm ci --omit=dev` |
 | Start command | `npm start` |
 | Health check path | `/api/health` |
+| Node version environment variable | `NODE_VERSION=22` |
 | Environment | `MONGODB_URI` (secret), `MONGODB_DB`, `NODE_ENV=production` |
 
 Render supplies `PORT`; do not force the GCP port there. If the existing service has no root directory, use build `cd server && npm ci --omit=dev` and start `cd server && npm start` instead.
@@ -96,8 +97,8 @@ If it works locally but fails on Render, the computer and Render use different o
 
 - [ ] Create a **HOTEL** milestone and assign issue #2 to it.
 - [x] Feature PR #3 merged into `dev` after all 13 tests passed.
-- [ ] DEV `/api/health` shows `database: connected`.
-- [ ] Create a unique fictional student on DEV, view by ID, filter its major, update it, refresh, and delete that same test record.
+- [x] DEV `/api/health` shows `database: connected` (October 1, 2026).
+- [x] Live DEV API: create a unique fictional student, list it, read by ID, filter its major, update it, read it again, and delete that same test record. See [VERIFICATION.md](VERIFICATION.md).
 - [ ] Merge the `dev` → `main` PR after DEV verification.
 - [ ] Link a successful HOTEL GCP workflow run in the grading dashboard.
 - [ ] Repeat CRUD on PROD with a fictional record and remove only that record afterward.

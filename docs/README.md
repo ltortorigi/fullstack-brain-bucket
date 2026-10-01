@@ -26,22 +26,22 @@
 | PATCH / update | [PATCH /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L88) |
 | DELETE | [DELETE /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L94) |
 | Frontend fetch + DOM updates | [Client JavaScript](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/public/assets/js/hotel.js) · [HTML](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/public/hotel.html) |
-| Persistent CRUD | [Real MongoDB integration tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/test/api.test.js); [GitHub Actions: 13 API and frontend tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36935983210); deployed Atlas verification pending |
+| Persistent CRUD | [Real MongoDB integration tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/test/api.test.js); [17 automated tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36939379402); [live DEV verification](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/VERIFICATION.md) |
 | Secrets excluded from Git | [.gitignore](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/.gitignore) · [blank environment template](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/.env.example) |
 | HOTEL milestone | [Milestones](https://github.com/ltortorigi/fullstack-brain-bucket/milestones) — HOTEL creation/assignment still required |
 | Feature issue | [Issue #2](https://github.com/ltortorigi/fullstack-brain-bucket/issues/2) |
 | Development branch | [hotel/student-crud](https://github.com/ltortorigi/fullstack-brain-bucket/tree/hotel/student-crud) |
 | Feature → dev | [PR #3 — merged into dev](https://github.com/ltortorigi/fullstack-brain-bucket/pull/3) |
-| dev → main | [PR #4 — draft, awaiting DEV verification](https://github.com/ltortorigi/fullstack-brain-bucket/pull/4) |
+| dev → main | [PR #4 — draft, awaiting GCP setup](https://github.com/ltortorigi/fullstack-brain-bucket/pull/4) |
 | Successful HOTEL PROD deployment | Pending; do not use the older GOLF run as HOTEL evidence |
 
 ## Current verification status
 
-- Implementation is merged into `dev` through PR #3.
-- [All 13 automated tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36935983210); the merged DEV commit also [passed CI](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36936081419).
-- Render still served the previous application when checked on October 1: `/api/health` returned HTTP 404 (`Cannot GET /api/health`). Check the selected branch, latest deploy log, start command, and MongoDB environment settings before claiming DEV is complete.
-- The existing PROD URL returned HTTP 502 before this work. No successful HOTEL production deployment is claimed.
-- PR #4 is intentionally draft until the deployed DEV CRUD round trip is verified. The HOTEL milestone still needs creation and assignment.
+- Implementation is merged into `dev` through PR #3, with safe connection diagnostics through PR #5.
+- [All 17 automated tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36939379402), covering the API, frontend, and connection diagnostics.
+- Render DEV passed live verification on October 1 at 18:31 CDT: MongoDB health, create, list, read by ID, filter, update, a fresh read retaining the update, and delete. The temporary fictional test record was removed. See [the verification record](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/VERIFICATION.md).
+- PROD still returned HTTP 502 at 18:29 CDT. Its VM and MongoDB configuration require verification before deployment.
+- PR #4 remains draft pending GCP setup. The HOTEL milestone still needs creation and assignment.
 - The assignment is **not ready to submit** until the remaining deployment and milestone checks in [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/SETUP.md) are complete.
 
 ## Use the app
