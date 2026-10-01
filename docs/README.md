@@ -11,29 +11,38 @@
 | PROD application | [GCP application](https://logan.barrycumbie.com/) |
 | DEV code | [dev](https://github.com/ltortorigi/fullstack-brain-bucket/tree/dev) |
 | DEV application | [Render application](https://fullstack-brain-bucket-dj2n.onrender.com/) |
-| Documentation | [Published docs](https://ltortorigi.github.io/fullstack-brain-bucket/) · [source](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/docs/README.md) |
-| CI/CD | [Tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/.github/workflows/test.yml) · [GCP deployment](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/.github/workflows/deploy-main-to-gcp.yml) |
+| Documentation | [Published docs](https://ltortorigi.github.io/fullstack-brain-bucket/) · [source](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/README.md) |
+| CI/CD | [Tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/.github/workflows/test.yml) · [GCP deployment](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/.github/workflows/deploy-main-to-gcp.yml) |
 
 ## HOTEL grading dashboard
 
 | Requirement | Evidence |
 | --- | --- |
-| MongoDB Atlas connection | [MongoDB driver, environment config, connection + ping](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/mongo.js) |
-| GET all | [GET /api/students](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L55) |
-| GET one by identifier | [GET /api/students/:id and ObjectId validation](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L73) |
-| Filtered GET | [GET /api/students?major=CIS](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L55) |
-| POST / create | [POST /api/students](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L80) |
-| PATCH / update | [PATCH /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L88) |
-| DELETE | [DELETE /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/routes.js#L94) |
-| Frontend fetch + DOM updates | [Client JavaScript](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/public/assets/js/hotel.js) · [HTML](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/public/hotel.html) |
-| Persistent CRUD | [Real MongoDB integration tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/test/api.test.js); [GitHub Actions: 10 database/API tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36935645474); live Atlas verification pending |
-| Secrets excluded from Git | [.gitignore](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/.gitignore) · [blank environment template](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/server/.env.example) |
-| HOTEL milestone | Pending creation and assignment to issue #2 |
+| MongoDB Atlas connection | [MongoDB driver, environment config, connection + ping](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/mongo.js) |
+| GET all | [GET /api/students](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L55) |
+| GET one by identifier | [GET /api/students/:id and ObjectId validation](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L73) |
+| Filtered GET | [GET /api/students?major=CIS](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L55) |
+| POST / create | [POST /api/students](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L80) |
+| PATCH / update | [PATCH /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L88) |
+| DELETE | [DELETE /api/students/:id](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/routes.js#L94) |
+| Frontend fetch + DOM updates | [Client JavaScript](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/public/assets/js/hotel.js) · [HTML](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/public/hotel.html) |
+| Persistent CRUD | [Real MongoDB integration tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/test/api.test.js); [GitHub Actions: 13 API and frontend tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36935983210); deployed Atlas verification pending |
+| Secrets excluded from Git | [.gitignore](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/.gitignore) · [blank environment template](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/.env.example) |
+| HOTEL milestone | [Milestones](https://github.com/ltortorigi/fullstack-brain-bucket/milestones) — HOTEL creation/assignment still required |
 | Feature issue | [Issue #2](https://github.com/ltortorigi/fullstack-brain-bucket/issues/2) |
 | Development branch | [hotel/student-crud](https://github.com/ltortorigi/fullstack-brain-bucket/tree/hotel/student-crud) |
-| Feature → dev | [PR #3](https://github.com/ltortorigi/fullstack-brain-bucket/pull/3) |
-| dev → main | PR pending DEV verification |
+| Feature → dev | [PR #3 — merged into dev](https://github.com/ltortorigi/fullstack-brain-bucket/pull/3) |
+| dev → main | [PR #4 — draft, awaiting DEV verification](https://github.com/ltortorigi/fullstack-brain-bucket/pull/4) |
 | Successful HOTEL PROD deployment | Pending; do not use the older GOLF run as HOTEL evidence |
+
+## Current verification status
+
+- Implementation is merged into `dev` through PR #3.
+- [All 13 automated tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36935983210); the merged DEV commit also [passed CI](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36936081419).
+- Render still served the previous application when checked on October 1: `/api/health` returned HTTP 404 (`Cannot GET /api/health`). Check the selected branch, latest deploy log, start command, and MongoDB environment settings before claiming DEV is complete.
+- The existing PROD URL returned HTTP 502 before this work. No successful HOTEL production deployment is claimed.
+- PR #4 is intentionally draft until the deployed DEV CRUD round trip is verified. The HOTEL milestone still needs creation and assignment.
+- The assignment is **not ready to submit** until the remaining deployment and milestone checks in [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/SETUP.md) are complete.
 
 ## Use the app
 
@@ -62,6 +71,6 @@ Stack: HTML/CSS/JavaScript, Bootstrap 5, Bootstrap Icons, Node.js, Express 5, Mo
 
 ## Setup + verification
 
-See [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/hotel/student-crud/docs/SETUP.md) for local, Render, and GCP setup, API examples, and the final deployment checklist.
+See [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/SETUP.md) for local, Render, and GCP setup, API examples, and the final deployment checklist.
 
 The previous Brain Bucket idea-board files remain in `public/asdindex.html`, `public/pages/`, and `public/assets/`. The HOTEL directory is served at `/`, `/index.html`, and `/hotel.html`.

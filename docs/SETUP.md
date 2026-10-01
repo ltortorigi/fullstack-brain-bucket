@@ -28,7 +28,7 @@ npm ci
 npm test
 ```
 
-Tests start a real disposable local MongoDB with `mongodb-memory-server`. They do not use Atlas credentials or alter your data. The first run downloads a MongoDB binary. GitHub Actions runs the same tests on Ubuntu with Node 22. The tests check CRUD, filtering, identifiers, validation, JSON errors, static routes, and safe sample seeding/clearing. The persistence check reads the stored update through a separate MongoDB client.
+The API tests start a real disposable local MongoDB with `mongodb-memory-server`. They do not use Atlas credentials or alter your data. The first run downloads a MongoDB binary. GitHub Actions runs the same tests on Ubuntu with Node 22. The tests check CRUD, filtering, identifiers, validation, JSON errors, static routes, and safe sample seeding/clearing. The persistence check reads the stored update through a separate MongoDB client. Three additional JSDOM tests exercise frontend CRUD actions, safe text rendering, missing-ID errors, and network-failure feedback.
 
 ## Development sample records
 
@@ -79,7 +79,7 @@ The workflow runs tests, connects through SSH, updates `main`, installs producti
 ## Final grading checks
 
 - [ ] Create a **HOTEL** milestone and assign issue #2 to it.
-- [ ] Feature PR merged into `dev` after tests pass.
+- [x] Feature PR #3 merged into `dev` after all 13 tests passed.
 - [ ] DEV `/api/health` shows `database: connected`.
 - [ ] Create a unique fictional student on DEV, view by ID, filter its major, update it, refresh, and delete that same test record.
 - [ ] Merge the `dev` → `main` PR after DEV verification.
