@@ -151,3 +151,7 @@ npm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Keep every real environment file private; allow the blank setup template.
+.env.*
+!.env.example

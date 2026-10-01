@@ -1,30 +1,12 @@
-# my generic web app framework 
-> [dev project] charlie
+# Fullstack Brain Bucket
+> A student directory with persistent MongoDB records.
 
-# deployments
+`@ltortorigi` | `2026-10-01` | `HOTEL`
 
-- dev server: https://barrycumbie.github.io/charlie-brain-bucket/
-- video production server: http://34.174.66.159
+Start with the **[HOTEL grading dashboard](docs/README.md)** for the application, code, API, issue, pull request, and deployment evidence.
 
-reference this [gist](https://gist.github.com/barrycumbie/36fff4083f20439615e1ed7811f81a3c)
+- [Setup and testing](docs/SETUP.md)
+- [DEV application](https://fullstack-brain-bucket-dj2n.onrender.com/)
+- [PROD application](https://logan.barrycumbie.com/)
 
-## sprint 99 / future dev ideas
-
-- check out this [milestone](https://github.com/barrycumbie/charlie-brain-bucket/milestone/1) for future dev ideas 
-
-## project dir/ structure 
-
-```bash
-.
-├── index.html
-├── assets
-│   ├── css
-│   │   └── style.css
-│   ├── img
-│   └── js
-│       └── main.js
-├── pages
-│   └── auth.html
-└── README.md
-```
-
+Deployment verification status is tracked in the grading dashboard.

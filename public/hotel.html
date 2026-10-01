@@ -1,110 +1,95 @@
 <!doctype html>
-
-<!doctype html>
-
-<html>
-
+<html lang="en">
 <head>
-
-  <title>
-    hotel 04
-  </title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple student directory with persistent MongoDB records.">
+  <title>Student Directory | Fullstack Brain Bucket</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/assets/css/hotel.css" rel="stylesheet">
+  <script src="/assets/js/hotel.js" defer></script>
 </head>
-
 <body>
-
-  <hr>
-
-  <h2>iss5. client sends data</h2>
-
-  <button id="postData">
-    post data
-  </button>
-
-  <button id="getData">
-    get data
-  </button>
-
-  <pre id="output"></pre>
-
-  <script>
-
-    // POST DATA
-    document
-      .querySelector('#postData')
-      .addEventListener(
-        'click',
-        sendData
-      );
-
-    async function sendData() {
-
-      const student = {
-        name: 'Lasagna',
-        major: 'CIS'
-      };
-
-      const response =
-        await fetch(
-          '/api/students',
-          {
-            method: 'POST',
-
-            headers: {
-              'Content-Type':
-                'application/json'
-            },
-
-            body:
-              JSON.stringify(student)
-          }
-        );
-
-      const data =
-        await response.json();
-
-      document
-        .querySelector('#output')
-        .textContent =
-          JSON.stringify(
-            data,
-            null,
-            2
-          );
-    }
-
-
-    // GET DATA
-    document
-      .querySelector('#getData')
-      .addEventListener(
-        'click',
-        getData
-      );
-
-    async function getData() {
-
-      const response =
-        await fetch(
-          '/api/students'
-        );
-
-      const data =
-        await response.json();
-
-      document
-        .querySelector('#output')
-        .textContent =
-          JSON.stringify(
-            data,
-            null,
-            2
-          );
-    }
-
-  </script>
-
+  <header class="site-header">
+    <div class="container d-flex align-items-center justify-content-between gap-3 py-3">
+      <a class="brand" href="/"><i class="bi bi-journal-bookmark-fill" aria-hidden="true"></i> Brain Bucket</a>
+      <a class="repo-link" href="https://github.com/ltortorigi/fullstack-brain-bucket">View project <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+    </div>
+  </header>
+  <main class="container py-4 py-lg-5">
+    <section class="intro mb-4">
+      <p class="eyebrow">FULLSTACK BRAIN BUCKET / HOTEL</p>
+      <h1>Student directory</h1>
+      <p class="text-secondary mb-3">One place to add, find, and keep your student records up to date.</p>
+      <span id="connectionStatus" class="connection-status" role="status">Checking connection…</span>
+    </section>
+    <div id="feedback" class="alert d-none" role="status" aria-live="polite"></div>
+    <div class="row g-4 align-items-start">
+      <section class="col-lg-4" aria-labelledby="formTitle">
+        <div class="panel p-4">
+          <h2 class="h5 mb-1" id="formTitle">Add a student</h2>
+          <p class="small text-secondary mb-4">Name and major are required.</p>
+          <form id="studentForm">
+            <label class="form-label" for="studentName">Name</label>
+            <input id="studentName" class="form-control mb-3" required maxlength="100" autocomplete="off" placeholder="e.g., Alex Example">
+            <label class="form-label" for="studentMajor">Major</label>
+            <input id="studentMajor" class="form-control mb-3" required maxlength="80" list="majorSuggestions" placeholder="e.g., CIS">
+            <datalist id="majorSuggestions"><option value="CIS"><option value="Exercise Science"><option value="Business"><option value="Nursing"></datalist>
+            <label class="form-label" for="studentNotes">Notes <span class="text-secondary fw-normal">(optional)</span></label>
+            <textarea id="studentNotes" class="form-control mb-3" rows="3" maxlength="500" placeholder="Anything you want to remember"></textarea>
+            <div class="d-flex gap-2">
+              <button id="saveButton" class="btn btn-primary flex-grow-1" type="submit">Add student</button>
+              <button id="cancelEdit" class="btn btn-outline-secondary d-none" type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
+        <details class="panel p-4 mt-3">
+          <summary class="fw-semibold">Find a student by ID</summary>
+          <form id="lookupForm" class="mt-3">
+            <label class="form-label small" for="lookupId">MongoDB student ID</label>
+            <input id="lookupId" class="form-control mb-2" required pattern="[a-fA-F0-9]{24}" maxlength="24" placeholder="24-character ID">
+            <button class="btn btn-outline-primary w-100" type="submit">Find student</button>
+          </form>
+        </details>
+      </section>
+      <section class="col-lg-8" aria-labelledby="directoryTitle">
+        <div class="panel p-4">
+          <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
+            <h2 id="directoryTitle" class="h5 mb-0">Your students <span id="recordCount" class="badge count-badge">0</span></h2>
+            <button id="refreshButton" class="btn btn-sm btn-outline-secondary" type="button"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Refresh</button>
+          </div>
+          <form id="filterForm" class="row g-2 mb-4">
+            <div class="col-12"><label class="form-label small mb-0" for="majorFilter">Filter by exact major</label></div>
+            <div class="col-sm"><input id="majorFilter" class="form-control" maxlength="80" list="majorSuggestions" placeholder="All majors"></div>
+            <div class="col-auto"><button class="btn btn-primary" type="submit">Filter</button></div>
+            <div class="col-auto"><button id="showAllButton" class="btn btn-outline-secondary" type="button">Show all</button></div>
+          </form>
+          <p id="listStatus" class="text-secondary small" role="status">Loading students…</p>
+          <div id="studentList" class="student-list" aria-live="polite"></div>
+        </div>
+        <section id="selectedPanel" class="panel p-4 mt-3 d-none" aria-labelledby="selectedTitle">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 id="selectedTitle" class="h5 mb-0">Student details</h2>
+            <button id="closeDetails" class="btn btn-sm btn-outline-secondary" type="button">Close</button>
+          </div>
+          <dl id="selectedDetails" class="mb-0"></dl>
+        </section>
+      </section>
+    </div>
+    <details class="panel p-4 mt-4">
+      <summary class="fw-semibold">API activity</summary>
+      <p class="small text-secondary mt-3">The latest response from the Express API. Student records are stored in MongoDB.</p>
+      <p id="requestLabel" class="small fw-semibold"></p>
+      <pre id="apiOutput" class="mb-0">Waiting for a response…</pre>
+    </details>
+    <section id="devTools" class="panel p-4 mt-3 d-none" aria-labelledby="devTitle">
+      <h2 id="devTitle" class="h6">Development sample data</h2>
+      <p class="small text-secondary">Add three sample students or remove only the sample records. Regular records are kept.</p>
+      <button id="seedButton" class="btn btn-sm btn-outline-primary" type="button">Add samples</button>
+      <button id="clearButton" class="btn btn-sm btn-outline-danger" type="button">Clear samples</button>
+    </section>
+  </main>
+  <footer class="container pb-4 small text-secondary">Logan Tortorigi · HOTEL · 2026 <span class="float-end">Built with Express + MongoDB</span></footer>
 </body>
-
 </html>
