@@ -43,7 +43,8 @@
 - GCP PROD successfully deployed through [GitHub Actions (attempt 4, October 10, 2026)](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/38094394447).
 - GCP VM `main` branch, PM2, local `/api/health`, public HTTPS `/api/health`, and MongoDB connection all passed verification on October 10, 2026. GET `/api/students` returned an existing record.
 - [HOTEL milestone](https://github.com/ltortorigi/fullstack-brain-bucket/milestones) is assigned to [issue #2](https://github.com/ltortorigi/fullstack-brain-bucket/issues/2), which is closed.
-- **Remaining verification:** Confirm full create → read → update → refresh → delete sequence on PROD and review the reported npm critical dependency vulnerability. Do not claim these checks completed without evidence.
+- PROD CRUD verified by the project owner on October 10, 2026: create a test student, list it, edit its major, refresh to confirm persistence, and delete it successfully.
+- Security: production `npm audit --omit=dev` reported 0 vulnerabilities after updating `proxy-addr` to 2.0.8; the fix was committed in [c4a6036](https://github.com/ltortorigi/fullstack-brain-bucket/commit/c4a6036a5699ddbd9b25690698a2a87a0ce4c3c6), with [successful tests](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/38095853116) and [successful GCP deployment](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/38095853119).
 
 ## Use the app
 
