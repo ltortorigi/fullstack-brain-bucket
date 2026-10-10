@@ -28,21 +28,22 @@
 | Frontend fetch + DOM updates | [Client JavaScript](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/public/assets/js/hotel.js) · [HTML](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/public/hotel.html) |
 | Persistent CRUD | [Real MongoDB integration tests](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/test/api.test.js); [17 automated tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36939379402); [live DEV verification](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/VERIFICATION.md) |
 | Secrets excluded from Git | [.gitignore](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/.gitignore) · [blank environment template](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/server/.env.example) |
-| HOTEL milestone | [Milestones](https://github.com/ltortorigi/fullstack-brain-bucket/milestones) — HOTEL creation/assignment still required |
+| HOTEL milestone | [Milestones](https://github.com/ltortorigi/fullstack-brain-bucket/milestones) — HOTEL assigned to issue #2 |
 | Feature issue | [Issue #2](https://github.com/ltortorigi/fullstack-brain-bucket/issues/2) |
 | Development branch | [hotel/student-crud](https://github.com/ltortorigi/fullstack-brain-bucket/tree/hotel/student-crud) |
 | Feature → dev | [PR #3 — merged into dev](https://github.com/ltortorigi/fullstack-brain-bucket/pull/3) |
-| dev → main | [PR #4 — draft, awaiting GCP setup](https://github.com/ltortorigi/fullstack-brain-bucket/pull/4) |
-| Successful HOTEL PROD deployment | Pending; do not use the older GOLF run as HOTEL evidence |
+| dev → main | [PR #4 — merged into main](https://github.com/ltortorigi/fullstack-brain-bucket/pull/4) |
+| Successful HOTEL PROD deployment | [Successful HOTEL GCP deployment (Oct 10, 2026)](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/38094394447) |
 
 ## Current verification status
 
-- Implementation is merged into `dev` through PR #3, with safe connection diagnostics through PR #5.
-- [All 17 automated tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/36939379402), covering the API, frontend, and connection diagnostics.
-- Render DEV passed live verification on October 1 at 18:31 CDT: MongoDB health, create, list, read by ID, filter, update, a fresh read retaining the update, and delete. The temporary fictional test record was removed. See [the verification record](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/VERIFICATION.md).
-- PROD still returned HTTP 502 at 18:29 CDT. Its VM and MongoDB configuration require verification before deployment.
-- PR #4 remains draft pending GCP setup. The HOTEL milestone still needs creation and assignment.
-- The assignment is **not ready to submit** until the remaining deployment and milestone checks in [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/SETUP.md) are complete.
+- HOTEL implementation is merged into `main` through [PR #4](https://github.com/ltortorigi/fullstack-brain-bucket/pull/4), following [PR #3](https://github.com/ltortorigi/fullstack-brain-bucket/pull/3) into `dev`.
+- [Automated HOTEL tests passed](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/38094394448). The test suite includes API, frontend, and connection diagnostics.
+- Render DEV passed live MongoDB CRUD verification on October 1, 2026. See [DEV verification](VERIFICATION.md).
+- GCP PROD successfully deployed through [GitHub Actions (attempt 4, October 10, 2026)](https://github.com/ltortorigi/fullstack-brain-bucket/actions/runs/38094394447).
+- GCP VM `main` branch, PM2, local `/api/health`, public HTTPS `/api/health`, and MongoDB connection all passed verification on October 10, 2026. GET `/api/students` returned an existing record.
+- [HOTEL milestone](https://github.com/ltortorigi/fullstack-brain-bucket/milestones) is assigned to [issue #2](https://github.com/ltortorigi/fullstack-brain-bucket/issues/2), which is closed.
+- **Remaining verification:** Confirm full create → read → update → refresh → delete sequence on PROD and review the reported npm critical dependency vulnerability. Do not claim these checks completed without evidence.
 
 ## Use the app
 
@@ -71,6 +72,6 @@ Stack: HTML/CSS/JavaScript, Bootstrap 5, Bootstrap Icons, Node.js, Express 5, Mo
 
 ## Setup + verification
 
-See [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/dev/docs/SETUP.md) for local, Render, and GCP setup, API examples, and the final deployment checklist.
+See [SETUP.md](https://github.com/ltortorigi/fullstack-brain-bucket/blob/main/docs/SETUP.md) for local, Render, and GCP setup, API examples, and the final deployment checklist.
 
 The previous Brain Bucket idea-board files remain in `public/asdindex.html`, `public/pages/`, and `public/assets/`. The HOTEL directory is served at `/`, `/index.html`, and `/hotel.html`.
