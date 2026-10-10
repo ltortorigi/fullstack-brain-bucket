@@ -1,27 +1,38 @@
 {
   "name": "fullstack-brain-bucket",
   "version": "1.0.0",
-  "description": "> [dev project] charlie",
-  "main": "index.js",
+  "description": "HOTEL student directory with Express and MongoDB Atlas",
+  "main": "app.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "test": "node --test test/*.test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ltortorigi/fullstack-brain-bucket.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Logan Tortorigi",
   "license": "ISC",
-  "type": "module", 
+  "type": "module",
   "bugs": {
     "url": "https://github.com/ltortorigi/fullstack-brain-bucket/issues"
   },
   "homepage": "https://github.com/ltortorigi/fullstack-brain-bucket#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "mongodb": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "mongodb-memory-server": "^10.4.3"
   }
 }
