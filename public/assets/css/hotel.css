@@ -1,43 +1,29 @@
-:root {
-  --ink: #172d38;
-  --accent: #246457;
-  --line: #dde5df;
-}
-body {
-  background: #f4f6f2;
-  color: var(--ink);
-  font-family: system-ui, sans-serif;
-}
-.site-header { background: #173e36; }
-.brand, .repo-link { color: #fff; text-decoration: none; }
-.brand { font-weight: 750; font-size: 1.1rem; }
-.brand i { margin-right: .55rem; }
-.repo-link { font-size: .85rem; }
-.repo-link:hover, .brand:hover { color: #d3e9da; }
-.container { max-width: 1160px; }
-.eyebrow { color: var(--accent); font-size: .7rem; letter-spacing: .15em; font-weight: 750; }
-h1 { font-weight: 750; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
-.panel { background: #fff; border: 1px solid var(--line); border-radius: 14px; }
-.connection-status { font-size: .8rem; color: #53615a; }
-.connection-status.connected { color: #196349; }
-.connection-status.disconnected { color: #a03036; }
-.connection-status::before { content: '●'; margin-right: .45rem; }
-.form-label { font-size: .85rem; font-weight: 600; }
-.form-control { border-color: #cdd8d1; }
-.form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 .2rem #24645720; }
-.btn-primary { --bs-btn-bg: #246457; --bs-btn-border-color: #246457; --bs-btn-hover-bg: #1c4f44; --bs-btn-hover-border-color: #1c4f44; --bs-btn-active-bg: #163e36; --bs-btn-active-border-color: #163e36; --bs-btn-disabled-bg: #246457; --bs-btn-disabled-border-color: #246457; }
-.btn-outline-primary { --bs-btn-color: #246457; --bs-btn-border-color: #246457; --bs-btn-hover-bg: #246457; --bs-btn-hover-border-color: #246457; --bs-btn-active-bg: #246457; --bs-btn-active-border-color: #246457; }
-.count-badge { background: #e9f2ed; color: var(--accent); font-size: .7rem; vertical-align: middle; }
-.student-list { display: grid; gap: 12px; }
-.student-card { padding: 18px; border: 1px solid var(--line); border-radius: 10px; }
-.student-card h3 { font-size: 1rem; font-weight: 650; overflow-wrap: anywhere; }
-.student-id { font: .7rem ui-monospace, monospace; color: #6d7972; overflow-wrap: anywhere; }
-.student-notes { white-space: pre-wrap; overflow-wrap: anywhere; color: #606d65; font-size: .85rem; }
-.major-badge { background: #edf3f0; color: #285447; font-size: .75rem; border-radius: 6px; padding: 4px 8px; overflow-wrap: anywhere; }
-pre { max-height: 300px; overflow: auto; background: #f4f6f2; padding: 14px; border-radius: 8px; font-size: .78rem; }
+/* Simple styling for the HOTEL hat collection assignment. */
+body { background: #fff; color: #222; font-family: Arial, sans-serif; }
+.container { max-width: 950px; }
+.site-header { background: #f3f3f3; border-bottom: 1px solid #ddd; }
+.brand, .repo-link { color: #222; text-decoration: none; }
+.brand { font-size: 1.1rem; font-weight: bold; }
+.repo-link { font-size: .9rem; }
+h1 { font-size: 2rem; font-weight: bold; }
+.eyebrow { font-size: .8rem; color: #666; }
+.panel { border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.form-label { font-weight: 600; }
+.form-control { border: 1px solid #aaa; border-radius: 4px; }
+.form-control:focus { border-color: #555; box-shadow: none; }
+.btn { border-radius: 4px; }
+.btn-primary { --bs-btn-bg: #444; --bs-btn-border-color: #444; --bs-btn-hover-bg: #222; --bs-btn-hover-border-color: #222; }
+.btn-outline-primary { --bs-btn-color: #444; --bs-btn-border-color: #444; --bs-btn-hover-bg: #444; --bs-btn-hover-border-color: #444; }
+.connection-status { font-size: .85rem; color: #555; }
+.connection-status.connected { color: #276738; }
+.connection-status.disconnected { color: #a22; }
+.count-badge, .major-badge { background: #eee; color: #333; }
+.major-badge { padding: 4px 8px; border-radius: 3px; }
+.student-list { display: grid; gap: 10px; }
+.student-card { padding: 12px; border: 1px solid #ddd; border-radius: 4px; }
+.student-card h3 { font-size: 1rem; font-weight: bold; overflow-wrap: anywhere; }
+.student-id { font-size: .7rem; color: #777; overflow-wrap: anywhere; }
+.student-notes, dd { overflow-wrap: anywhere; white-space: pre-wrap; }
+pre { padding: 12px; background: #f5f5f5; overflow: auto; max-height: 250px; }
 summary { cursor: pointer; }
-dd { overflow-wrap: anywhere; white-space: pre-wrap; }
-@media (max-width: 575px) {
-  .repo-link { font-size: .75rem; }
-  footer span { float: none !important; display: block; margin-top: .3rem; }
-}
+@media (max-width: 575px) { footer span { float: none !important; display: block; } }
