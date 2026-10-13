@@ -62,7 +62,7 @@ function actionButton(text, className, action) {
 
 async function loadStudents() {
   const major = ui('majorFilter').value.trim();
-  ui('listStatus').textContent = 'Loading students…';
+  ui('listStatus').textContent = 'Loading hats…';
   let students;
   try {
     students = await request(`/api/students${major ? `?major=${encodeURIComponent(major)}` : ''}`);
@@ -99,7 +99,7 @@ function showDetails(student) {
   selectedId = student._id;
   ui('selectedDetails').replaceChildren();
   for (const [label, value] of Object.entries({
-    Brand: student.name, Style: student.major, Details: student.notes || 'No details',
+    Color: student.name, Style: student.major,
     ID: student._id,
   })) {
     ui('selectedDetails').append(element('dt', 'small text-secondary', label),
@@ -117,7 +117,6 @@ async function editStudent(id) {
   editingId = student._id;
   ui('studentName').value = student.name;
   ui('studentMajor').value = student.major;
-  ui('studentNotes').value = student.notes || '';
   ui('formTitle').textContent = 'Edit hat';
   ui('saveButton').textContent = 'Save changes';
   ui('cancelEdit').classList.remove('d-none');
@@ -154,7 +153,7 @@ ui('studentForm').addEventListener('submit', (event) => {
         update ? 'PATCH' : 'POST', {
           name: ui('studentName').value.trim(),
           major: ui('studentMajor').value.trim(),
-          notes: ui('studentNotes').value.trim(),
+          notes: '',
         });
     resetForm();
     ui('majorFilter').value = '';
@@ -206,7 +205,7 @@ run(async () => {
   } catch (error) {
     ui('connectionStatus').textContent = 'Connection unavailable';
     ui('connectionStatus').classList.add('disconnected');
-    ui('listStatus').textContent = 'Could not load students. Refresh when the server is available.';
+    ui('listStatus').textContent = 'Could not load hats. Refresh when the server is available.';
     throw error;
   }
   await loadStudents();
