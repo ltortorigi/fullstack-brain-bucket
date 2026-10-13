@@ -68,9 +68,9 @@ test('frontend creates, filters, retrieves, edits, and deletes using fetch', asy
   const {dom, window, document, records, calls} = setup();
   try {
     await ready(document);
-    assert.match(document.getElementById('listStatus').textContent, /No students yet/);
-    document.getElementById('studentName').value = 'Alex Example';
-    document.getElementById('studentMajor').value = 'CIS';
+    assert.match(document.getElementById('listStatus').textContent, /No hats yet/);
+    document.getElementById('studentName').value = 'Black';
+    document.getElementById('studentMajor').value = 'Baseball Cap';
     submit(window, 'studentForm');
     await ready(document);
     assert.equal(records.length, 1);
@@ -83,10 +83,10 @@ test('frontend creates, filters, retrieves, edits, and deletes using fetch', asy
     await ready(document);
     document.querySelector('.student-card button').click();
     await ready(document);
-    assert.match(document.getElementById('selectedDetails').textContent, /Alex Example/);
+    assert.match(document.getElementById('selectedDetails').textContent, /Black/);
     document.querySelectorAll('.student-card button')[1].click();
     await ready(document);
-    assert.equal(document.getElementById('studentName').value, 'Alex Example');
+    assert.equal(document.getElementById('studentName').value, 'Black');
     document.getElementById('studentMajor').value = 'Business';
     submit(window, 'studentForm');
     await ready(document);
